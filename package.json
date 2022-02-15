@@ -1,0 +1,50 @@
+{
+    "name": "template",
+    "version": "1.0.0",
+    "description": "Standard repository template.",
+    "repository": "git@github.com:asaidimu/template.git",
+    "author": "saidimu",
+    "license": "MIT",
+    "scripts": {
+        "ci": "yarn install && yarn upgrade"
+    },
+    "devDependencies": {
+        "@semantic-release/changelog": "^6.0.1",
+        "@semantic-release/commit-analyzer": "^9.0.2",
+        "@semantic-release/git": "^10.0.1",
+        "@semantic-release/release-notes-generator": "^10.0.3",
+        "semantic-release": "^18.0.1"
+    },
+    "release": {
+        "branches": [
+            "main"
+        ],
+        "plugins": [
+            "@semantic-release/commit-analyzer",
+            "@semantic-release/release-notes-generator",
+            [
+                "@semantic-release/changelog",
+                {
+                    "changelogFile": "CHANGELOG.md"
+                }
+            ],
+            [
+                "@semantic-release/npm",
+                {
+                    "pkgRoot": "dist"
+                }
+            ],
+            [
+                "@semantic-release/git",
+                {
+                    "assets": [
+                        "CHANGELOG.md",
+                        "package.json",
+                        "yarn.lock"
+                    ],
+                    "message": "chore(release): Release v${nextRelease.version}\n\n${nextRelease.notes}"
+                }
+            ]
+        ]
+    }
+}
